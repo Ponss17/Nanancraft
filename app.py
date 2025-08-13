@@ -2,6 +2,8 @@ from flask import Flask, Response
 from mcstatus import JavaServer
 import threading
 import time
+import requests
+import os
 
 app = Flask(__name__)
 
@@ -34,7 +36,7 @@ def status():
             f"Latencia: {latency} ms\n"
             f"Versión: {version}\n"
         )
-    except Exception as e:
+    except Exception:
         respuesta = "🔴 NaNaCraft2 está OFFLINE o no responde."
 
     return Response(respuesta, mimetype='text/plain')
@@ -43,13 +45,13 @@ def auto_ping():
     while True:
         try:
             print("⏳ Auto-ping para mantener la API activa...")
+            # Cambia localhost:5000 por tu URL real si lo usas en Render:
             requests.get("http://localhost:5000/")
         except Exception as e:
             print(f"Error en auto-ping: {e}")
         time.sleep(300)
 
 if __name__ == "__main__":
-    import requests
     threading.Thread(target=auto_ping, daemon=True).start()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
