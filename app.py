@@ -5,7 +5,6 @@ import time
 
 app = Flask(__name__)
 
-# Configura aquí la IP y puerto de tu servidor Minecraft
 SERVER_IP = "23.230.3.73"
 SERVER_PORT = 25615
 
