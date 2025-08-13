@@ -47,7 +47,7 @@ def auto_ping():
             requests.get("http://localhost:5000/")
         except Exception as e:
             print(f"Error en auto-ping: {e}")
-        time.sleep(300)  # Cada 5 minutos
+        time.sleep(300)
 
 if __name__ == "__main__":
     import requests
